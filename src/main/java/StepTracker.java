@@ -1,17 +1,32 @@
-public class APLine {
-    private int a, b, c;
+public class StepTracker{
+    private int minSteps, totalSteps;
+    private int totalDays, actDays;
 
-    public APLine(int a1, int b1, int c1) {
-        a = a1;
-        b = b1;
-        c = c1;
+    public StepTracker(int goal){
+        minSteps = goal;
+        totalSteps = 0;
+        totalDays = 0;
+        actDays = 0;
     }
 
-    public double getSlope() {
-        return -((double) a / b);
+    public void addDailySteps(int steps){
+        totalSteps += steps;
+        totalDays++;
+
+        if (steps >= minSteps){
+            actDays++;
+        }
     }
 
-    public boolean isOnLine(int x, int y) {
-        return (a * x) + (b * y) + c == 0;
+    public int activeDays(){
+        return actDays;
+    }
+
+    public double averageSteps(){
+        if (totalDays == 0){
+            return 0.0;
+        } else {
+            return (double) totalSteps / totalDays;
+        }
     }
 }
